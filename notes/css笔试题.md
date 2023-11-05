@@ -91,8 +91,32 @@
 
 ### 水平居中
 
-#### 父元素固定宽度块级元素
+父元素固定宽度块级元素
 
 > p元素嵌套h1元素会产生PHP (<p>1<h1>2</h1></p> => <p />1<h1>2</h1><p />)
 
+- 子元素为行内元素：text-align:center
+
+  
+
+- 子元素为定宽块元素
+
+  1. margin: 0 auto;
+  2. 计算边距
+  3. 子绝父相，子：left:50% transform:translateX(-50%)/margin-left:-50%子宽
+  4. flex布局
+
 ### 垂直居中
+
+父元素盒子容器
+
+- 子元素为行内元素：
+  1. 单行：子：line-height:父元素高度；
+  2. 多行： 父：display: inline/inline-block/table-cell;vertical-align:middle
+- 子元素为定宽块元素
+  1. 父：display: inline/inline-block/table-cell;vertical-align:middle
+  2. flex布局
+  3. 计算边距
+  4. 子绝父相
+
+## 移动端适配
