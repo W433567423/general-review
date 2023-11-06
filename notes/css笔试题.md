@@ -119,4 +119,43 @@
   3. 计算边距
   4. 子绝父相
 
-## 移动端适配
+## 响应式布局(5种)
+
+- flex布局(最简单)
+
+- 子相父相布局（最麻烦）
+
+- grid布局（最强大最新）
+
+  ```css
+  父元素{
+      grid-template-columns: 30px 30px 40px ; // 列数(几列，每列多宽)
+      grid-template-row: repeat(4,20px)/repeat(auto-fill,20px)/repeat(3,1fr); // 行数(fr:等分，minmax()范围)
+          
+      column-gap: ; // 列间距
+      column-gap: ; // 列间距
+      gap: ; // 间距
+      
+      grid-auto-flow: row/column; // 先行后列|先列后行
+      
+      justify-items: start/end/center/stretch;  // 水平对齐方式
+      align-items: start/end/center/stretch;  // 单元格垂直对齐方式
+      place-items:start/end/center/stretch;  // 单元格对齐方式
+      
+      justify-content:start/end/center/stretch/space-around/space-between/space-evenly; // 整个区域对齐方式
+      align-content:start/end/center/stretch/space-around/space-between/space-evenly;
+      ...
+  }
+  
+  子元素{
+      grid-column-start/grid-column-end/grid-row-start/grid-row-end: ; // 指定该元素的具体位置(哪根网格线)
+     justify-self/align-self: ; // 该元素的对齐方式
+  }
+  ```
+
+  
+
+- float布局（易塌陷）
+
+- rem布局
+
