@@ -1,1 +1,2 @@
-console.log(1)
+import './contents/js/闭包'
+
