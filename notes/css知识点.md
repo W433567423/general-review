@@ -1,6 +1,6 @@
 # CSS笔试题
 
-思维导图：https://gitmind.cn/app/docs/mgmvoyil
+[思维导图](https://gitmind.cn/app/docs/mgmvoyil)
 
 ## 防止高度坍塌
 
