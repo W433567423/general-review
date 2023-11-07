@@ -26,7 +26,7 @@ JS作用域有两种：全局作用域、函数作用域
 
 ## 函数执行过程
 
-![image-20231107130037399](C:\Users\t4335\AppData\Roaming\Typora\typora-user-images\image-20231107130037399.png)
+![image-20231107132118377](C:\Users\t4335\AppData\Roaming\Typora\typora-user-images\image-20231107132118377.png)
 
 ### 闭包
 
