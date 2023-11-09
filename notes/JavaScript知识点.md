@@ -74,9 +74,15 @@ JS作用域有两种：全局作用域、函数作用域
 
 ### 继承
 
-在构造函数的.prop
+实现继承的7种方式
 
-> 箭头函数只仅仅不绑定this（箭头函数底层相当于.bind()）
+- 原型链方式继承
+- 构造函数继承
+- 实例继承
+- 拷贝继承
+- 组合继承
+- 寄生组合继承
+- ES6中extends
 
 ### call、bind、aplly
 
@@ -84,11 +90,59 @@ JS作用域有两种：全局作用域、函数作用域
 - bind() **永久**绑定this，并且可以传参（实参）
 - apply() 立即调用，临时改变this，并且可以传参（数组被拆散）
 
+> 箭头函数只仅仅不绑定this（箭头函数底层相当于.bind()）
+>
 
 
 
+### 深克隆
 
+自定义递归克隆
 
+```ts
+const deepClone = (target: any) => {
+    let newObj: any
+    if (typeof target === 'object') {
+        if (Array.isArray(target)) {
+            newObj = []
+            for (let i in target) {
+                newObj.push(deepClone(target[i]))
+            }
+        } else if (target === null) {
+            newObj = null
+        } else if (target.constructor === RegExp) {
+            newObj = target
+        } else {
+            newObj = {}
+            for (let i in target) {
+                newObj[i] = deepClone(target[i])
+            }
+        }
+    } else {
+        newObj = target
+    }
+    return newObj
+}
 
+```
 
+## ES6
 
+### 模板字符串
+
+${}里可以放：
+
+- 变量、算数计算、三目、对象属性、创建对象、调用函数、访问数组元素
+- 有返回值的合法js表达式
+
+不可以放：
+
+- 没有返回值的js表达式
+- 分支/判断、循环等程序结构
+
+### let
+
+#### var的缺陷
+
+- 声明提前
+- 没有块级作用域
