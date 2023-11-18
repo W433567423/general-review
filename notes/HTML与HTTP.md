@@ -1,4 +1,4 @@
-# HTML与HTTP知识点
+# HTML知识点
 
 ## HTML语义化标签
 
@@ -117,6 +117,64 @@ svg优势
 WebWorker可用于懒加载、无限列表等优化操作
 
 ServiceWorker可用于数据mock、离线资源缓存等
+
+# 网络与HTTP知识点
+
+## OSI与TCP/IP
+
+OSI七层参考模型(理论)，TCP/IP是基于该理论的实现
+
+![image-20231118131444572](https://tutu-1313352375.cos.ap-nanjing.myqcloud.com/my/TCP_IP.png)
+
+## TCP/UDP协议
+
+TCP是一个面向连接的、可靠的、基于字节流的传输层协议。 而UDP是一个面向无连接的传输层协议
+
+- **面向连接**。所谓的连接，指的是客户端和服务器的连接，在双方互相通信之前，TCP需要三次握手建立连接，而UDP没有相应建立连接的过程。 
+- **可靠性**。TCP花了非常多的功夫保证连接的可靠，这个可靠性体现在哪些方面呢？一个是有状态，另一个是可控制。TCP会精准记录哪些数据发送了，哪些数据被对方接收了，哪些没有被接收到，而且保证数据包按序到达，不允许半点差错。这是有状态。 当意识到丢包了或者网络环境不佳，TCP根据具体情况调整自己的行为，控制自己的发送速度或者重发。这是可控制。相应的，UDP就是无状态,不可控 的。
+- **面向字节流**。UDP的数据传输是基于数据报的，这是因为仅仅只是继承了IP层的特性，而 TCP 为了 维护状态，将一个个IP包变成了字节流。
+
+## HTTP协议
+
+[思维导图](https://www.processon.com/view/link/5ec52841e0b34d5f261e14e0)
+
+### Restful服务
+
+特征
+
+- 每⼀个URI代表⼀种资源(Resources)
+- 客户端和服务器之间，传递这种资源的某种表现层
+- 客户端通过HTTP动词，对服务器端资源进⾏操作，实现"表现层状态转化"
+
+### 跨域
+
+浏览器遵循同源政策( scheme(协议) 、 host(主机) 和 port(端口) 都相同则为 同源 )。跨域请求的响应一般会被浏览器所拦截
+
+解决方案
+
+- jsonp(简单兼容性好，可用于解决主流浏览器的跨域数据访问的问题。**缺点是仅支持get方法具有局限性,不安全可能会遭受XSS攻击**)
+- cors(**需要浏览器和后端同时支持**)
+- postMessage(HTML5 XMLHttpRequest Level 2)
+- websocket(HTML5的一个持久化的协议)
+- Node中间件代理
+- nginx反向代理
+
+脚手架配置proxy
+
+```js
+//vue cli|vite|webpack
+proxy: {
+    '/api': {
+        target: 'https://wtututu.top/',//服务器域名
+            changeOrigin: true,
+                pathRewrite: {
+                    '^/api': ''
+                }
+    }
+}
+```
+
+
 
 # NodeJs、webpack与Bable
 
