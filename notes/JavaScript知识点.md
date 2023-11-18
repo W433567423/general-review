@@ -43,7 +43,7 @@ console.log(a); // 打印全局变量
 
 ### 函数执行过程
 
-![image-20231118121155720](../static/Snipaste_2023-11-18_12-13-07.png)
+![image-20231118121155720](https://tutu-1313352375.cos.ap-nanjing.myqcloud.com/my/activationObject.png)
 
 > 作用域的本质是一个对象，作用域链的本质是一个对象数组
 
