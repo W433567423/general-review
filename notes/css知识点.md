@@ -1,4 +1,4 @@
-# CSS笔试题
+# CSS知识点
 
 [思维导图](https://gitmind.cn/app/docs/mgmvoyil)
 
