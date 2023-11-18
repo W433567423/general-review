@@ -18,7 +18,22 @@ JS作用域有两种：全局作用域、函数作用域
 
 函数作用域即用即创建，用完即销毁，又名AO(Actived Object)
 
-![image-20231107125416953](C:\Users\t4335\AppData\Roaming\Typora\typora-user-images\image-20231107125416953.png)
+```js
+// 作用域
+var a = 10
+//function相当于 new Function
+//此时并不进行调用
+function f() {
+    var a = 100
+    a++
+    console.log(a);
+    // 函数执行完毕，销毁AO
+}
+f()  // 函数调用，创建AO
+console.log(a); // 打印全局变量
+```
+
+
 
 ### 作用域链
 
@@ -28,7 +43,7 @@ JS作用域有两种：全局作用域、函数作用域
 
 ### 函数执行过程
 
-![image-20231107132118377](C:\Users\t4335\AppData\Roaming\Typora\typora-user-images\image-20231107132118377.png)
+![image-20231118121155720](../static/Snipaste_2023-11-18_12-13-07.png)
 
 > 作用域的本质是一个对象，作用域链的本质是一个对象数组
 
@@ -198,13 +213,15 @@ ${}里可以放：
 
 ### Promise
 
+异步编程的方案
 
-
-
-
-
-
-
+- 回调函数(ES5)
+- Promise(ES6,消灭回调地狱)
+  - 三大状态:pending->fulfilled/rejected
+- Generators/yield(ES6)
+- async/await(ES7，基于Promise/Generators,彻底消除嵌套)
+- 发布订阅(其他)
+- 时间监听(其他)
 
 
 
