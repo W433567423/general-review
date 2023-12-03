@@ -26,8 +26,18 @@ vue2中v-if优先级低于v-for，vue3中反之
 
 概念：VUE的生命周期就是 Vue 组件实例从一开始创建到最后销毁的这么一个过程，一个完整的生命周期，包括从开始创建、初始化数据、编译模板、挂载Dom→渲染、更新→渲染、卸载等一系列过程
 
-hooks：beforeCreate/created、beforeMount/mounted、beforeUpdate/updated、beforeDestroy/destroyed（beforeUnmount/Unmounted）
+hooks：beforeCreate/created（setup）、beforeMount/mounted、beforeUpdate/updated、beforeDestroy/destroyed（beforeUnmount/Unmounted）
 
 其他hooks：
 
 ​	![vue生命周期](https://tutu-1313352375.cos.ap-nanjing.myqcloud.com/my/vue_life_cycle.png)
+
+用途
+
+- beforeCreate：通常⽤于插件开发中执⾏⼀些初始化任务 
+- created：组件初始化完毕，可以访问各种数据，获取接⼝数据等 
+- mounted：dom已创建，可⽤于获取访问数据和dom元素；访问⼦组件等。 
+- beforeUpdate：此时 view 层还未更新，可⽤于获取更新前各种状态 
+- updated：完成 view 层的更新，更新后，所有状态已是最新 
+- beforeunmounted：实例被销毁前调⽤，可⽤于⼀些定时器或订阅的取消 
+- unmounted：销毁⼀个实例。可清理它与其它实例的连接，解绑它的全部指令及事件监听器
