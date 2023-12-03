@@ -177,13 +177,23 @@ proxy: {
 }
 ```
 
+## 缓存
 
+- 用户自行清除缓存
 
-# 
+- index.html页面加meta标签
 
+  ```
+  <meta http-equiv="pragram" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="expires" content="0">
+  ```
 
+- 后端nginx配置，让index.html不被缓存(vue默认打包后会自动将js、css等资源加上哈希值)
 
+- 前端脚手架配置
 
+- 引入第三方库解决
 
 
 
