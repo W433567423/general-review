@@ -13,3 +13,10 @@
 - 其他
   - Vuex
   - Event Bus
+
+## v-if和v-for优先级
+
+vue2中v-if优先级低于v-for，vue3中反之
+
+> vue官方文档中不推荐这俩api被同时使用在一个元素中
+
