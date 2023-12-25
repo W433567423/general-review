@@ -49,3 +49,9 @@ hooks：beforeCreate/created（setup）、beforeMount/mounted、beforeUpdate/upd
 3. 通常在表单项上使用v-model ，还可以在自定义组件上使用，表示某个值的输入和输出控制。 
 4. 通过<input v-model="xxx">的方式将xxx的值绑定到表单元素value上；对于checkbox，可以使用true-value和false-value指定特殊的值，对于radio可以使用value指定特殊的值；对于select可以通过options元素的value设置特殊的值；还可以结合.lazy,.number,.trim对v-mode的行为做进⼀步限定；v-model 在自定义组件上时⼜会有很大不同，vue3中它类似于sync修饰符，最终展开的结果是modelValue属性和 update:modelValue事件；vue3中我们甚至可以用参数形式指定多个不同的绑定，例如v-model:foo和vmodel:bar，非常强大！ 
 5. v-model 是⼀个指令，它的神奇魔法实际上是vue的编译器完成的。我做过测试，包含 v-model 的模板，转 换为渲染函数之后，实际上还是是value属性的绑定以及input事件监听，事件回调函数中会做相应变量更新操 作。编译器根据表单元素的不同会展开不同的DOM属性和事件对，⽐如text类型的input和textarea会展开为 value和input事件；checkbox和radio类型的input会展开为checked和change事件；select⽤value作为属性，用change作为事件。
+
+## Vue如何拓展一个组件
+
+逻辑拓展：mixins，composition API，extends
+
+内容拓展：slots
