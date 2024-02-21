@@ -33,7 +33,7 @@
 	"dependencies": {},
 	"husky": {
 		"hooks": {
-			"pre-commit": "git add .",
+			"pre-commit": "echo \"git commit trigger husky pre-commit hook\"",
 			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
 		}
 	}
