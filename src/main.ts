@@ -1,2 +1,1 @@
-import './contents/js/面向对象'
-
+import './dataStructure/十进制转二进制';
