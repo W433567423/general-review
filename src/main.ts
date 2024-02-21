@@ -1,1 +1,1 @@
-import './dataStructure/十进制转二进制';
+import './dataStructure/进制转化';

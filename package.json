@@ -1,19 +1,21 @@
 {
-  "name": "general-review",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "devDependencies": {
-    "@types/node": "^20.11.19",
-    "parcel": "^2.10.2",
-    "typescript": "^5.3.3"
-  },
-  "scripts": {
-    "dev-html": "parcel index.html",
-    "dev": "nodemon  -e  ts,tsx  --exec ts-node  src/main.ts"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {}
+	"name": "general-review",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"devDependencies": {
+		"@types/node": "^20.11.19",
+		"parcel": "^2.10.2",
+		"typescript": "^5.3.3"
+	},
+	"scripts": {
+		"dev_html": "parcel index.html",
+		"clear_console": "clear",
+		"dev": "npm run clear_console && ts-node  src/main.ts",
+		"dev_nodemon": "nodemon  -e  ts,tsx  --exec ts-node  src/main.ts"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {}
 }
