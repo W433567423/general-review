@@ -20,20 +20,18 @@ JS作用域有两种：全局作用域、函数作用域
 
 ```js
 // 作用域
-var a = 10
+var a = 10;
 //function相当于 new Function
 //此时并不进行调用
 function f() {
-    var a = 100
-    a++
-    console.log(a);
-    // 函数执行完毕，销毁AO
+	var a = 100;
+	a++;
+	console.log(a);
+	// 函数执行完毕，销毁AO
 }
-f()  // 函数调用，创建AO
+f(); // 函数调用，创建AO
 console.log(a); // 打印全局变量
 ```
-
-
 
 ### 作用域链
 
@@ -83,7 +81,7 @@ console.log(a); // 打印全局变量
 > new关键字进行构造时进行四件事
 >
 > 1. 创建一个新对象
-> 2. 新对象继承构造函数的原型对象 
+> 2. 新对象继承构造函数的原型对象
 > 3. 调用构造函数（进行this指向，并添加属性/方法）
 > 4. 返回新对象地址
 
@@ -111,29 +109,28 @@ console.log(a); // 打印全局变量
 
 ```ts
 const deepClone = (target: any) => {
-    let newObj: any
-    if (typeof target === 'object') {
-        if (Array.isArray(target)) {
-            newObj = []
-            for (let i in target) {
-                newObj.push(deepClone(target[i]))
-            }
-        } else if (target === null) {
-            newObj = null
-        } else if (target.constructor === RegExp) {
-            newObj = target
-        } else {
-            newObj = {}
-            for (let i in target) {
-                newObj[i] = deepClone(target[i])
-            }
-        }
-    } else {
-        newObj = target
-    }
-    return newObj
-}
-
+	let newObj: any;
+	if (typeof target === 'object') {
+		if (Array.isArray(target)) {
+			newObj = [];
+			for (let i in target) {
+				newObj.push(deepClone(target[i]));
+			}
+		} else if (target === null) {
+			newObj = null;
+		} else if (target.constructor === RegExp) {
+			newObj = target;
+		} else {
+			newObj = {};
+			for (let i in target) {
+				newObj[i] = deepClone(target[i]);
+			}
+		}
+	} else {
+		newObj = target;
+	}
+	return newObj;
+};
 ```
 
 ## ES6
@@ -160,15 +157,15 @@ ${}里可以放：
 
 ### let/var/const区别
 
-| 区别                          | var  | let  | const |
-| ----------------------------- | ---- | ---- | ----- |
-| 是否产生“块级作用域”          | ×    | √    | √     |
-| 是否会声明提前                | √    | ×    | ×     |
-| 是否保存在window              | √    | ×    | ×     |
-| 是否在同一作用域可重复声明    | √    | ×    | ×     |
-| 是否必须设置初始值            | ×    | ×    | √     |
-| 是否能修改原始类型值/引用地址 | √    | √    | ×     |
-|                               |      |      |       |
+| 区别                          | var | let | const |
+| ----------------------------- | --- | --- | ----- |
+| 是否产生“块级作用域”          | ×   | √   | √     |
+| 是否会声明提前                | √   | ×   | ×     |
+| 是否保存在window              | √   | ×   | ×     |
+| 是否在同一作用域可重复声明    | √   | ×   | ×     |
+| 是否必须设置初始值            | ×   | ×   | √     |
+| 是否能修改原始类型值/引用地址 | √   | √   | ×     |
+|                               |     |     |       |
 
 ### 箭头函数
 
@@ -193,7 +190,7 @@ ${}里可以放：
 ### 参数增强
 
 - 参数默认值
-- 剩余参数(rest)  ...args
+- 剩余参数(rest) ...args
 
 ### 展开运算符
 
@@ -222,14 +219,3 @@ ${}里可以放：
 - async/await(ES7，基于Promise/Generators,彻底消除嵌套)
 - 发布订阅(其他)
 - 时间监听(其他)
-
-
-
-
-
-
-
-
-
-
-
