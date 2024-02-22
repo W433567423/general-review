@@ -1,11 +1,21 @@
 {
+	"author": "",
+	"description": "",
+	"keywords": [],
+	"license": "ISC",
+	"main": "index.js",
 	"name": "general-review",
 	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
+	"scripts": {
+		"commitlint": "npx commitlint --config .commitlintrc.js -e ./.git/COMMIT_EDITMSG",
+		"commitlint:text": "npx commitlint --config .commitlintrc.js",
+		"dev": " ts-node src/main.ts",
+		"dev_nodemon": "nodemon -e ts,tsx --exec ts-node src/main.ts",
+		"format": "prettier --write \"src/**/*.ts\"",
+		"lint": "eslint \"./src/**/*.{js,ts}\" --fix",
+		"parcel": "parcel index.html",
+		"prepare": "husky"
+	},
 	"devDependencies": {
 		"@commitlint/cli": "^18.6.1",
 		"@commitlint/config-conventional": "^18.6.2",
@@ -20,15 +30,5 @@
 		"parcel": "^2.10.2",
 		"prettier": "^3.2.5",
 		"typescript": "^5.3.3"
-	},
-	"scripts": {
-		"prepare": "husky",
-		"lint": "eslint \"./src/**/*.{js,ts}\" --fix",
-		"format": "prettier --write \"src/**/*.ts\"",
-		"parcel": "parcel index.html",
-		"dev": " ts-node src/main.ts",
-		"dev_nodemon": "nodemon -e ts,tsx --exec ts-node src/main.ts",
-		"commitlint:text": "npx commitlint --config .commitlintrc.js",
-		"commitlint": "npx commitlint --config .commitlintrc.js -e ./.git/COMMIT_EDITMSG"
 	}
 }
