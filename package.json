@@ -28,6 +28,7 @@
     "parcel": "parcel index.html",
     "dev": " ts-node src/main.ts",
     "dev_nodemon": "nodemon -e ts,tsx --exec ts-node src/main.ts",
-    "commitlint": "commitlint --edit"
+    "commitlint:text": "npx commitlint --config .commitlintrc.js",
+    "commitlint": "npx commitlint --config .commitlintrc.js -e ./.git/COMMIT_EDITMSG"
   }
 }
