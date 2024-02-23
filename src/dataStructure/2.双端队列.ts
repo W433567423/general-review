@@ -74,19 +74,19 @@ class DQueue<T = any> {
 
 export { DQueue };
 
-const dQueue = new DQueue<string>();
-dQueue.addFront('BBB');
-dQueue.addFront('AAA');
-dQueue.addBack('CCC');
-dQueue.addBack('DDD');
-console.log('🚀 ~ dQueue.isEmpty():', dQueue.isEmpty()); // false
-console.log('🚀 ~ dQueue.size():', dQueue.size()); // 4
-console.log('🚀 ~ dQueue.toString():', dQueue.toString()); // AAA,BBB,CCC,DDD
-console.log('🚀 ~ dQueue.peekBack():', dQueue.peekBack()); // DDD
-console.log('🚀 ~ dQueue.peekFront:', dQueue.peekFront()); // AAA
-dQueue.removeBack();
-console.log('🚀 ~ dQueue.removeBack():', dQueue.toString()); // AAA,BBB,CCC
-dQueue.removeFront();
-console.log('🚀 ~ dQueue.removeFront():', dQueue.toString()); // BBB,CCC
-dQueue.clear();
-console.log('🚀 ~ dQueue.isEmpty():', dQueue.isEmpty()); // true
+// const dQueue = new DQueue<string>();
+// dQueue.addFront('BBB');
+// dQueue.addFront('AAA');
+// dQueue.addBack('CCC');
+// dQueue.addBack('DDD');
+// console.log('🚀 ~ dQueue.isEmpty():', dQueue.isEmpty()); // false
+// console.log('🚀 ~ dQueue.size():', dQueue.size()); // 4
+// console.log('🚀 ~ dQueue.toString():', dQueue.toString()); // AAA,BBB,CCC,DDD
+// console.log('🚀 ~ dQueue.peekBack():', dQueue.peekBack()); // DDD
+// console.log('🚀 ~ dQueue.peekFront:', dQueue.peekFront()); // AAA
+// dQueue.removeBack();
+// console.log('🚀 ~ dQueue.removeBack():', dQueue.toString()); // AAA,BBB,CCC
+// dQueue.removeFront();
+// console.log('🚀 ~ dQueue.removeFront():', dQueue.toString()); // BBB,CCC
+// dQueue.clear();
+// console.log('🚀 ~ dQueue.isEmpty():', dQueue.isEmpty()); // true

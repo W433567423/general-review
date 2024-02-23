@@ -1,6 +1,13 @@
 import { Stack } from './1.栈';
 
-// 十进制转二进制
+/**
+ * DONE
+ * @description 十进制转二进制
+ * @author tutu
+ * @time 2024-02-23 16:25:24"
+ * @param {number} decNumber
+ * @returns {string} 转化后的进制
+ */
 const convertBinary = (decNumber: number) => {
 	const stack = new Stack<number>(); // 存放进制的栈
 	let number = decNumber;
@@ -18,7 +25,15 @@ const convertBinary = (decNumber: number) => {
 	return binaryString;
 };
 
-// 进制转化
+/**
+ * DONE
+ * @description 进制转化
+ * @author tutu
+ * @time 2024-02-23 16:31:27
+ * @param {number} decNumber
+ * @param {number} base
+ * @returns {string} 转化后的进制
+ */
 const ConversionBase = (decNumber: number, base: number) => {
 	if (base < 2 || base > 36) {
 		return '';

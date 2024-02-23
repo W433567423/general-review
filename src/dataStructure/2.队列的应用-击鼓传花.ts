@@ -1,9 +1,12 @@
 import { Queue } from './2.队列';
 /**
- * DONE 击鼓传花
- * @description:
- * @author: tutu
- * @time: 2024-02-23 16:06:42"
+ * DONE
+ * @description 击鼓传花
+ * @author tutu
+ * @time 2024-02-23 16:34:39
+ * @param {T[]} list 参赛者列表
+ * @param {number} num 击鼓传花的次数
+ * @returns {}
  */
 const hotPotato = <T>(list: T[], num: number) => {
 	const queue = new Queue();
