@@ -52,7 +52,7 @@
 
   ```ts
   // 使用splice()方法可以让我们在数组中的任意位置删除或添加元素，其参数为：
-
+  
   //第一个参数：表示想要删除或插入的元素的索引。
   // 第二个参数：表示删除元素的格式。
   // 第三个参数：表示添加到数组中的值。
@@ -99,34 +99,34 @@
 ```ts
 // 基于数组实现
 class StackByArray<T = any> {
-  private items: Array<T>;
-  constructor() {
-    this.items = [];
-  }
-  // 添加末尾元素
-  push(element: T) {
-    this.items.push(element);
-  }
-  // 删除末尾元素
-  pop() {
-    return this.items.pop();
-  }
-  // 获取末尾元素
-  peek() {
-    return this.items[this.size() - 1];
-  }
-  // 是否为空
-  isEmpty() {
-    return !this.size();
-  }
-  // 清空栈
-  clear() {
-    return (this.items = []);
-  }
-  // 获取栈元素数量
-  size() {
-    return this.items.length;
-  }
+	private items: Array<T>;
+	constructor() {
+		this.items = [];
+	}
+	// 添加末尾元素
+	push(element: T) {
+		this.items.push(element);
+	}
+	// 删除末尾元素
+	pop() {
+		return this.items.pop();
+	}
+	// 获取末尾元素
+	peek() {
+		return this.items[this.size() - 1];
+	}
+	// 是否为空
+	isEmpty() {
+		return !this.size();
+	}
+	// 清空栈
+	clear() {
+		return (this.items = []);
+	}
+	// 获取栈元素数量
+	size() {
+		return this.items.length;
+	}
 }
 ```
 
@@ -135,52 +135,52 @@ class StackByArray<T = any> {
 ```ts
 // 基于类实现
 interface IStack<T> {
-  [key: string]: T;
+	[key: string]: T;
 }
 class StackByClass<T = any> {
-  private count: number;
-  private items: IStack<T>;
-  constructor() {
-    this.count = 0;
-    this.items = {};
-  }
-  push(element: T) {
-    this.items[this.count] = element;
-    this.count++;
-  }
-  size() {
-    return this.count;
-  }
-  isEmpty() {
-    return !this.count;
-  }
-  pop() {
-    if (this.isEmpty()) {
-      return undefined;
-    }
-    this.count--;
-    const result = this.items[this.count];
-    delete this.items[this.count];
-    return result;
-  }
-  peek() {
-    return this.items[this.count - 1];
-  }
-  clear() {
-    this.count = 0;
-    this.items = {};
-  }
-  // 打印栈
-  toString() {
-    if (this.isEmpty()) {
-      return "";
-    }
-    let result: string = String(this.items["0"]);
-    for (let i = 1; i < this.count; i++) {
-      result = `${result},${this.items[i]}`;
-    }
-    return result;
-  }
+	private count: number;
+	private items: IStack<T>;
+	constructor() {
+		this.count = 0;
+		this.items = {};
+	}
+	push(element: T) {
+		this.items[this.count] = element;
+		this.count++;
+	}
+	size() {
+		return this.count;
+	}
+	isEmpty() {
+		return !this.count;
+	}
+	pop() {
+		if (this.isEmpty()) {
+			return undefined;
+		}
+		this.count--;
+		const result = this.items[this.count];
+		delete this.items[this.count];
+		return result;
+	}
+	peek() {
+		return this.items[this.count - 1];
+	}
+	clear() {
+		this.count = 0;
+		this.items = {};
+	}
+	// 打印栈
+	toString() {
+		if (this.isEmpty()) {
+			return '';
+		}
+		let result: string = String(this.items['0']);
+		for (let i = 1; i < this.count; i++) {
+			result = `${result},${this.items[i]}`;
+		}
+		return result;
+	}
 }
 ```
 
@@ -191,20 +191,20 @@ class StackByClass<T = any> {
 ```ts
 // 十进制转二进制
 const convertBinary = (decNumber: number) => {
-  const stack = new Stack<number>(); // 存放进制的栈
-  let number = decNumber;
-  let rem: number;
-  let binaryString = ""; // 转换后的二进制
-  while (number > 0) {
-    rem = Math.floor(number % 2); // 获取余数
-    number = Math.floor(number / 2); // 获取商
-    stack.push(rem); // 入栈
-  }
+	const stack = new Stack<number>(); // 存放进制的栈
+	let number = decNumber;
+	let rem: number;
+	let binaryString = ''; // 转换后的二进制
+	while (number > 0) {
+		rem = Math.floor(number % 2); // 获取余数
+		number = Math.floor(number / 2); // 获取商
+		stack.push(rem); // 入栈
+	}
 
-  while (!stack.isEmpty()) {
-    binaryString += stack.pop()!.toString();
-  }
-  return binaryString;
+	while (!stack.isEmpty()) {
+		binaryString += stack.pop()!.toString();
+	}
+	return binaryString;
 };
 ```
 
@@ -213,22 +213,202 @@ const convertBinary = (decNumber: number) => {
 ```ts
 // 进制转化
 const ConversionBase = (decNumber: number, base: number) => {
-  if (base < 2 || base > 36) {
-    return "";
-  }
-  const stack = new Stack<number>(); // 存放进制的栈
-  const digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // 被除数|进制
-  let number = decNumber;
-  let rem: number; // 余数
-  let baseString = ""; // 转换后的进制结果
-  while (number > 0) {
-    rem = Math.floor(number % base);
-    number = Math.floor(number / base);
-    stack.push(rem);
-  }
-  while (!stack.isEmpty()) {
-    baseString += digits[stack.pop()!];
-  }
-  return baseString;
+	if (base < 2 || base > 36) {
+		return '';
+	}
+	const stack = new Stack<number>(); // 存放进制的栈
+	const digits = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // 被除数|进制
+	let number = decNumber;
+	let rem: number; // 余数
+	let baseString = ''; // 转换后的进制结果
+	while (number > 0) {
+		rem = Math.floor(number % base);
+		number = Math.floor(number / base);
+		stack.push(rem);
+	}
+	while (!stack.isEmpty()) {
+		baseString += digits[stack.pop()!];
+	}
+	return baseString;
 };
 ```
+
+## 队列和双端队列
+
+队列是一种遵循先进先出(FIFO)原则的一组有序的项，队列在尾部添加新元素，并从顶部移除元素，而双端队列是一种将栈的原则和队列的原则混合在一起的数据结构。
+
+### 实现队列(基于对象)
+
+```ts
+// 队列
+interface IQueue<T> {
+	[key: string]: T;
+}
+class Queue<T = any> {
+	private count: number;
+	private lowestCount: number;
+	private items: IQueue<T>;
+	constructor() {
+		this.count = 0;
+		this.lowestCount = 0;
+		this.items = {};
+	}
+	//向队列的尾部添加元素
+	enqueue(e: T) {
+		this.items[this.count] = e;
+		this.count++;
+	}
+	// 在队列的开头移除第一个元素，并返回被移除的元素
+	dequeue() {
+		if (this.isEmpty()) {
+			return undefined;
+		}
+		const result = this.items[this.lowestCount];
+		delete this.items[this.lowestCount];
+		this.lowestCount++;
+		return result;
+	}
+	// 返回队列的第一个元素
+	peek() {
+		return this.items[this.lowestCount];
+	}
+	// 判断队列是否为空
+	isEmpty() {
+		return !this.size();
+	}
+	// 返回队列包含元素的个数
+	size() {
+		return this.count - this.lowestCount;
+	}
+	// 清空队列
+	clear() {
+		this.lowestCount = 0;
+		this.count = 0;
+		this.items = {};
+	}
+	// 将队列转换成字符串格式
+	toString() {
+		if (this.isEmpty()) {
+			return undefined;
+		}
+		let result = '';
+		for (let i = this.lowestCount; i < this.count; i++) result += `${this.items[i]},`;
+		return result.slice(0, -1);
+	}
+}
+
+export { Queue };
+
+const queue = new Queue<string>();
+queue.enqueue('AAA');
+queue.enqueue('BBB');
+queue.enqueue('CCC');
+queue.enqueue('DDD');
+console.log(queue.isEmpty()); // false
+console.log(queue.size()); // 4
+console.log(queue.toString()); // AAA,BBB,CCC,DDD
+console.log(queue.peek()); // AAA
+queue.dequeue();
+queue.clear();
+console.log(queue.isEmpty()); // true
+```
+
+### 双端队列数据结构
+
+双端队列是一种允许我们同时从前端和后端添加和移除元素的特殊队列，在计算机科学中，双端队列的一个常见应用是存储一系列撤销操作，每当用户在软件中进行了一个操作，该操作被存在一个双端队列中，当用户点击撤销按钮时，该操作会被从双端队列中弹出，表示它被从后面移除了。在进行预先定义的一定数量的操作后，最新进行的操作会被从双端队列的前端移除。
+
+```ts
+// 双端队列
+interface IDQueue<T> {
+	[key: string]: T;
+}
+class DQueue<T = any> {
+	private lastIndex: number;
+	private firstIndex: number;
+	private items: IDQueue<T>;
+	constructor() {
+		this.lastIndex = 0;
+		this.firstIndex = 0;
+		this.items = {};
+	} // 在双端队列的前端添加新元素。
+	addFront(e: T) {
+		this.items[--this.firstIndex] = e;
+	}
+	// 在双端队列的后端添加新元素。
+	addBack(e: T) {
+		this.items[this.lastIndex] = e;
+		this.lastIndex++;
+	}
+	// 在双端队列的前端移除新元素。
+	removeFront() {
+		if (this.isEmpty()) {
+			return undefined;
+		}
+		const result = this.items[this.firstIndex];
+		delete this.items[this.firstIndex];
+		this.firstIndex++;
+		return result;
+	}
+	// 在双端队列的后端移除新元素。
+	removeBack() {
+		if (this.isEmpty()) {
+			return undefined;
+		}
+		this.lastIndex--;
+		const result = this.items[this.lastIndex];
+		delete this.items[this.lastIndex];
+		return result;
+	}
+	// 返回双端队列前端的第一个元素。
+	peekFront() {
+		return this.items[this.firstIndex];
+	}
+	// 返回双端队列后端的第一个元素。
+	peekBack() {
+		return this.items[this.lastIndex - 1];
+	}
+	// 判断队列是否为空
+	isEmpty() {
+		return !this.size();
+	}
+	// 返回队列包含元素的个数
+	size() {
+		return this.lastIndex - this.firstIndex;
+	}
+	// 清空队列
+	clear() {
+		this.firstIndex = 0;
+		this.lastIndex = 0;
+		this.items = {};
+	}
+	// 将队列转换成字符串格式
+	toString() {
+		if (this.isEmpty()) {
+			return undefined;
+		}
+		let result = '';
+		for (let i = this.firstIndex; i < this.lastIndex; i++) result += `${this.items[i]},`;
+		return result.slice(0, -1);
+	}
+}
+
+export { DQueue };
+
+const dQueue = new DQueue<string>();
+dQueue.addFront('BBB');
+dQueue.addFront('AAA');
+dQueue.addBack('CCC');
+dQueue.addBack('DDD');
+console.log('🚀 ~ dQueue.isEmpty():', dQueue.isEmpty()); // false
+console.log('🚀 ~ dQueue.size():', dQueue.size()); // 4
+console.log('🚀 ~ dQueue.toString():', dQueue.toString()); // AAA,BBB,CCC,DDD
+console.log('🚀 ~ dQueue.peekBack():', dQueue.peekBack()); // DDD
+console.log('🚀 ~ dQueue.peekFront:', dQueue.peekFront()); // AAA
+dQueue.removeBack();
+console.log('🚀 ~ dQueue.removeBack():', dQueue.toString()); // AAA,BBB,CCC
+dQueue.removeFront();
+console.log('🚀 ~ dQueue.removeFront():', dQueue.toString()); // BBB,CCC
+dQueue.clear();
+console.log('🚀 ~ dQueue.isEmpty():', dQueue.isEmpty()); // true
+```
+

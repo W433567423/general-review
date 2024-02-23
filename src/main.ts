@@ -1,1 +1,1 @@
-import './dataStructure/2.队列';
+import './dataStructure/2.双端队列';
