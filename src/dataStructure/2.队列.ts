@@ -57,15 +57,15 @@ class Queue<T = any> {
 
 export { Queue };
 
-const queue = new Queue<string>();
-queue.enqueue('AAA');
-queue.enqueue('BBB');
-queue.enqueue('CCC');
-queue.enqueue('DDD');
-console.log(queue.isEmpty()); // false
-console.log(queue.size()); // 4
-console.log(queue.toString()); // AAA,BBB,CCC,DDD
-console.log(queue.peek()); // AAA
-queue.dequeue();
-queue.clear();
-console.log(queue.isEmpty()); // true
+// const queue = new Queue<string>();
+// queue.enqueue('AAA');
+// queue.enqueue('BBB');
+// queue.enqueue('CCC');
+// queue.enqueue('DDD');
+// console.log(queue.isEmpty()); // false
+// console.log(queue.size()); // 4
+// console.log(queue.toString()); // AAA,BBB,CCC,DDD
+// console.log(queue.peek()); // AAA
+// queue.dequeue();
+// queue.clear();
+// console.log(queue.isEmpty()); // true

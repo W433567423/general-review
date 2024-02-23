@@ -1,1 +1,1 @@
-import './dataStructure/2.双端队列';
+import './dataStructure/2.队列的应用-击鼓传花';
