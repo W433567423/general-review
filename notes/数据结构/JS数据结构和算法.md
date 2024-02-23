@@ -412,3 +412,84 @@ dQueue.clear();
 console.log('🚀 ~ dQueue.isEmpty():', dQueue.isEmpty()); // true
 ```
 
+### 队列的应用
+
+#### 击鼓传花
+
+```ts
+import { Queue } from './2.队列';
+/**
+ * DONE
+ * @description 击鼓传花
+ * @author tutu
+ * @time 2024-02-23 16:34:39
+ * @param {T[]} list 参赛者列表
+ * @param {number} num 击鼓传花的次数
+ * @returns {}
+ */
+const hotPotato = <T>(list: T[], num: number) => {
+	const queue = new Queue();
+	const eliminatedList = [];
+	// 将参赛者放入队列
+	list.forEach((e) => queue.enqueue(e));
+	console.log('🚀 ~ 游戏开始:', list);
+
+	while (queue.size() > 1) {
+		for (let i = 0; i < num; i++) {
+			// console.log('🚀 ~ hotPotato ~ i:', i, queue.peek());
+			queue.enqueue(queue.dequeue());
+		}
+		console.log('🚀 ~ 击鼓到,淘汰一位:', queue.peek());
+
+		eliminatedList.push(queue.dequeue());
+		console.log('🚀 ~ 击鼓队列:', [queue.toString()]);
+	}
+
+	return {
+		eliminated: eliminatedList,
+		winner: queue.dequeue()
+	};
+};
+
+const names = ['AAA', 'BBB', 'CCC', 'DDD', 'EEE'];
+const result = hotPotato(names, 7);
+console.log(`胜利者：${result.winner}`);
+```
+
+#### 回文检测
+
+```ts
+import { DQueue } from './2.双端队列';
+
+/**
+ * DONE
+ * @description 检测回文
+ * @author tutu
+ * @time 2024-02-23 16:44:17
+ * @param {string} str 检测的字符串
+ * @returns {boolean} 是否是回文
+ */
+const palindromeChecker = (str: string) => {
+	if (!str.length) return false;
+
+	const dequeue = new DQueue();
+	const lowerStr = str.toLowerCase().replaceAll(/s/g, '');
+
+	let firstStr: string, lastStr: string;
+	let isEqual = true;
+
+	for (const e of lowerStr) dequeue.addBack(e.charAt);
+
+	while (dequeue.size() > 1 && isEqual) {
+		firstStr = dequeue.removeFront();
+		lastStr = dequeue.removeBack();
+		if (firstStr !== lastStr) isEqual = false;
+	}
+	return isEqual;
+};
+
+console.log("🚀 ~ palindromeChecker('kayak'):", palindromeChecker('kayak'));
+console.log("🚀 ~ palindromeChecker('level'):", palindromeChecker('level'));
+console.log("🚀 ~ palindromeChecker('ABBC'):", palindromeChecker('ABBC'));
+```
+
