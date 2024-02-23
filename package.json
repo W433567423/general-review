@@ -9,7 +9,7 @@
 	"scripts": {
 		"commitlint": "npx commitlint --config .commitlintrc.js -e ./.git/COMMIT_EDITMSG",
 		"commitlint:text": "npx commitlint --config .commitlintrc.js",
-		"dev": " ts-node src/main.ts",
+		"dev": "clear && ts-node src/main.ts",
 		"dev_nodemon": "nodemon -e ts,tsx --exec ts-node src/main.ts",
 		"format": "prettier --write \"src/**/*.ts\"",
 		"lint": "eslint \"./src/**/*.{js,ts}\" --fix",
