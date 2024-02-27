@@ -1,1 +1,1 @@
-import './dataStructure/3.链表';
+import './dataStructure/3.双向链表';

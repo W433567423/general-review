@@ -1,7 +1,7 @@
 import { defaultEquals } from './utils/index';
 
 // 定义节点
-class LinkNode<T = any> {
+export class LinkNode<T = any> {
 	public element: T;
 	public next: LinkNode | null;
 
@@ -11,10 +11,10 @@ class LinkNode<T = any> {
 }
 
 // 定义列表
-class Link<T> {
-	private count: number;
-	private head: LinkNode | null;
-	private equalsFn: (a: T, b: T) => boolean;
+export class Link<T> {
+	protected count: number;
+	protected head: LinkNode | null;
+	protected equalsFn: (a: T, b: T) => boolean;
 	constructor(equalsFn = defaultEquals) {
 		this.count = 0;
 		this.head = null;
