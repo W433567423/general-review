@@ -11,7 +11,7 @@ export class LinkNode<T = any> {
 }
 
 // 定义列表
-export class Link<T> {
+export class LinkedList<T> {
 	protected count: number;
 	protected head: LinkNode | null;
 	protected equalsFn: (a: T, b: T) => boolean;
@@ -43,8 +43,8 @@ export class Link<T> {
 				this.head = node;
 			} else {
 				// 在列表其他地方插入
-				const cur = this.getElementAt(index - 1);
-				node.next = cur!.next;
+				const cur = this.getElementAt(index - 1) || null;
+				node.next = cur?.next || null;
 				cur!.next = node;
 			}
 			return true;
@@ -83,11 +83,11 @@ export class Link<T> {
 		if (index >= 0 && index < this.count) {
 			let cur = this.head;
 			if (index === 0) {
-				this.head = cur!.next;
+				this.head = cur?.next || null;
 			} else {
-				const prev = this.getElementAt(index - 1);
-				cur = prev!.next;
-				prev!.next = cur!.next;
+				const prev = this.getElementAt(index - 1) || null;
+				cur = prev?.next || null;
+				prev!.next = cur?.next || null;
 			}
 			this.count--;
 			return cur;
@@ -121,22 +121,22 @@ export class Link<T> {
 		return result.slice(0, -1);
 	}
 }
-const link = new Link();
-console.log(link.size()); // 0
-console.log(link.isEmpty()); // true
-link.push(1);
-console.log(link.getHead()); // 1
-link.push(3);
-link.push(2);
-link.push(5);
-console.log(link.size()); // 4
-const node = link.getElementAt(2);
-console.log(node?.element); // 2
-console.log(link.indexOf(5)); // 3
-console.log(link.indexOf(8)); // -1
-console.log(link.insert(9, 1)); // true
-console.log(link.toString()); // 1,9,3,2,5
-console.log(link.remove(2)?.element); // 2
-console.log(link.toString()); // 1,9,3,5
-console.log(link.removeAt(2)?.element); // 3
-console.log(link.toString()); // 1,9,5
+// const link = new LinkedList();
+// console.log(link.size()); // 0
+// console.log(link.isEmpty()); // true
+// link.push(1);
+// console.log(link.getHead()); // 1
+// link.push(3);
+// link.push(2);
+// link.push(5);
+// console.log(link.size()); // 4
+// const node = link.getElementAt(2);
+// console.log(node?.element); // 2
+// console.log(link.indexOf(5)); // 3
+// console.log(link.indexOf(8)); // -1
+// console.log(link.insert(9, 1)); // true
+// console.log(link.toString()); // 1,9,3,2,5
+// console.log(link.remove(2)?.element); // 2
+// console.log(link.toString()); // 1,9,3,5
+// console.log(link.removeAt(2)?.element); // 3
+// console.log(link.toString()); // 1,9,5

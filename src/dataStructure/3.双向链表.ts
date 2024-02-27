@@ -197,7 +197,7 @@ linkedList.push(2);
 linkedList.push(5);
 console.log(linkedList.size()); // 4
 const node = linkedList.getElementAt(2);
-console.log(node!.element); // 2
+console.log(node?.element); // 2
 console.log(linkedList.indexOf(5)); // 3
 console.log(linkedList.indexOf(8)); // -1
 console.log(linkedList.insert(9, 1)); // true
