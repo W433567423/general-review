@@ -1,21 +1,7 @@
-import { defaultToString } from './utils/index';
+import { ValuePair, defaultToString } from './utils/index';
 // 基于类实现
 interface IDictionary<T = any> {
 	[key: string | number | symbol]: T;
-}
-
-class ValuePair {
-	private key: string | number | symbol;
-	private value: any;
-	constructor(key: string | number | symbol, value: any) {
-		this.key = key;
-		this.value = value;
-	}
-	toString() {
-		if (typeof this.key === 'symbol') {
-			return `[#${String(this.key)}]: ${this.value}`;
-		} else return `{#${this.key}}: ${this.value}`;
-	}
 }
 
 class Dictionary {

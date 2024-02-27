@@ -21,4 +21,18 @@ const defaultToString = (item: unknown) => {
 	}
 	return item.toString();
 };
-export { defaultEquals, defaultToString };
+
+class ValuePair {
+	private key: string | number | symbol;
+	private value: any;
+	constructor(key: string | number | symbol, value: any) {
+		this.key = key;
+		this.value = value;
+	}
+	toString() {
+		if (typeof this.key === 'symbol') {
+			return `[#${String(this.key)}]: ${this.value}`;
+		} else return `{#${this.key}}: ${this.value}`;
+	}
+}
+export { ValuePair, defaultEquals, defaultToString };
