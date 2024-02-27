@@ -1,1 +1,1 @@
-import './dataStructure/4.集合(ES5实现)';
+import './dataStructure/4.集合ES6';

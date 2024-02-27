@@ -1120,3 +1120,8 @@ console.log('🚀 ~ set1.difference(set2).values():', set1.difference(set2).valu
 console.log('🚀 ~ set1.isSubSetOf(set2):', set1.isSubSetOf(set2));
 ```
 
+### ES6中的Set
+
+```ts
+```
+
