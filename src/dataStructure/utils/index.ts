@@ -11,4 +11,14 @@ const defaultEquals = <T>(a: T, b: T) => {
 	return a === b;
 };
 
-export { defaultEquals };
+const defaultToString = (item: unknown) => {
+	if (item === null) {
+		return `NULL`;
+	} else if (item === undefined) {
+		return 'UNDEFINED';
+	} else if (typeof item === 'string' || item instanceof String) {
+		return `${item}`;
+	}
+	return item.toString();
+};
+export { defaultEquals, defaultToString };
