@@ -493,3 +493,509 @@ console.log("🚀 ~ palindromeChecker('level'):", palindromeChecker('level'));
 console.log("🚀 ~ palindromeChecker('ABBC'):", palindromeChecker('ABBC'));
 ```
 
+## 链表(单，双向，循环)
+
+### 实现单向链表
+
+```ts	
+import { defaultEquals } from './utils/index';
+
+// 定义节点
+export class LinkNode<T = any> {
+	public element: T;
+	public next: LinkNode | null;
+
+	constructor(e: T) {
+		this.element = e;
+	}
+}
+
+// 定义列表
+export class LinkedList<T> {
+	protected count: number;
+	protected head: LinkNode | null;
+	protected equalsFn: (a: T, b: T) => boolean;
+	constructor(equalsFn = defaultEquals) {
+		this.count = 0;
+		this.head = null;
+		this.equalsFn = equalsFn<T>;
+	}
+	// 向链表尾部添加一个新元素
+	push(element: T) {
+		let cur = null;
+		const node = new LinkNode(element);
+		if (this.head) {
+			cur = this.head;
+			while (cur.next) {
+				cur = cur.next;
+			}
+			cur.next = node;
+		} else this.head = node;
+		this.count++;
+	}
+	// 在链表指定位置插入一个新元素
+	insert(element: T, index: number) {
+		if (index >= 0 && index <= this.count) {
+			const node = new LinkNode(element);
+			// 在链表首位插入
+			if (index === 0) {
+				node.next = this.head;
+				this.head = node;
+			} else {
+				// 在列表其他地方插入
+				const cur = this.getElementAt(index - 1) || null;
+				node.next = cur?.next || null;
+				cur!.next = node;
+			}
+			return true;
+		}
+		return false;
+	}
+	// 返回链表中特定位置的元素，如果没有则返回undefined
+	getElementAt(index: number) {
+		if (index >= 0 && index <= this.count) {
+			let cur = this.head;
+			for (let i = 0; i < index && cur; i++) {
+				cur = cur.next;
+			}
+			return cur;
+		}
+		return undefined;
+	}
+	// 从链表中移除一个元素
+	remove(element: T) {
+		const index = this.indexOf(element);
+		return this.removeAt(index);
+	}
+	// 返回元素在链表中的索引，如果没有则返回-1
+	indexOf(element: T) {
+		let cur = this.head;
+		for (let i = 0; i < this.count && cur; i++) {
+			if (this.equalsFn(element, cur.element)) {
+				return i;
+			}
+			cur = cur.next;
+		}
+		return -1;
+	}
+	// 从链表指定位置移除一个元素
+	removeAt(index: number) {
+		if (index >= 0 && index < this.count) {
+			let cur = this.head;
+			if (index === 0) {
+				this.head = cur?.next || null;
+			} else {
+				const prev = this.getElementAt(index - 1) || null;
+				cur = prev?.next || null;
+				prev!.next = cur?.next || null;
+			}
+			this.count--;
+			return cur;
+		}
+		return undefined;
+	}
+	// 如果链表中不包含任何元素，则返回true，否则返回false
+	isEmpty() {
+		return !this.count;
+	}
+	// 返回链表包含的元素个数
+	size() {
+		return this.count;
+	}
+	// 返回链表的第一个元素
+	getHead() {
+		return this.head || undefined;
+	}
+	// 返回表示整个链表的字符串
+	toString() {
+		if (this.isEmpty()) {
+			return undefined;
+		}
+		let result = '';
+		let cur = this.head;
+		// console.log('🚀 ~ Link<T> ~ toString ~ cur:', cur!.next?.next);
+		while (cur) {
+			result += `${cur?.element},`;
+			cur = cur.next;
+		}
+		return result.slice(0, -1);
+	}
+}
+const link = new LinkedList();
+console.log(link.size()); // 0
+console.log(link.isEmpty()); // true
+link.push(1);
+console.log(link.getHead()); // 1
+link.push(3);
+link.push(2);
+link.push(5);
+console.log(link.size()); // 4
+const node = link.getElementAt(2);
+console.log(node?.element); // 2
+console.log(link.indexOf(5)); // 3
+console.log(link.indexOf(8)); // -1
+console.log(link.insert(9, 1)); // true
+console.log(link.toString()); // 1,9,3,2,5
+console.log(link.remove(2)?.element); // 2
+console.log(link.toString()); // 1,9,3,5
+console.log(link.removeAt(2)?.element); // 3
+console.log(link.toString()); // 1,9,5
+```
+
+### 实现双向链表
+
+```ts	
+import { defaultEquals } from './utils/index';
+
+// 定义节点
+class DoublyNode<T = any> {
+	public element: T;
+	public next: DoublyNode | null;
+	public prev: DoublyNode | null;
+
+	constructor(e: T) {
+		this.element = e;
+	}
+}
+
+// 双向定义列表
+class DoublyLinkedList<T> {
+	public count: number;
+	private head: DoublyNode | null;
+	private tail: DoublyNode | null;
+	private equalsFn: (a: T, b: T) => boolean;
+
+	constructor() {
+		this.count = 0;
+		this.head = null;
+		this.tail = null;
+		this.equalsFn = defaultEquals<T>;
+	}
+	// 插入
+	insert(element: T, index: number) {
+		if (index >= 0 && index <= this.count) {
+			const node = new DoublyNode(element);
+			let current = this.head;
+			if (index === 0) {
+				if (this.head === null) {
+					this.head = node;
+					this.tail = node;
+				} else {
+					node.next = this.head;
+					current!.prev = node;
+					this.head = node;
+				}
+			} else if (index === this.count) {
+				current = this.tail;
+				current!.next = node;
+				node.prev = current;
+				this.tail = node;
+			} else {
+				const previous = this.getElementAt(index - 1);
+				current = previous!.next;
+				node.next = current;
+				previous!.next = node;
+				current!.prev = node;
+				node.prev = previous || null;
+			}
+			this.count++;
+			return true;
+		}
+		return false;
+	}
+	// 通过下标获取元素
+	getElementAt(index: number) {
+		// 超出界域返回undefined
+		if (index < 0 || index > this.count) return undefined;
+		else if (index === 0) return this.head;
+		else if (index === this.count) return this.tail;
+		else if (index < this.count / 2) {
+			// 从头开始寻找
+			let cur = this.head;
+			for (let i = 0; i < index && cur; i++) {
+				cur = cur.next;
+				i++;
+			}
+			return cur;
+		} else {
+			// 从尾部开始寻找
+			// 从头开始寻找
+			let cur = this.tail;
+			for (let i = 0; i < index && cur; i++) {
+				cur = cur.prev;
+				i++;
+			}
+			return cur;
+		}
+	}
+	//获取元素下标
+	indexOf(element: T) {
+		let cur = this.head;
+		for (let i = 0; i < this.count && cur; i++) {
+			if (this.equalsFn(element, cur.element)) {
+				return i;
+			}
+			cur = cur.next;
+		}
+		return -1;
+	}
+	// 删除指定元素
+	remove(element: T) {
+		const index = this.indexOf(element);
+		return this.removeAt(index);
+	}
+	// 删除任意下标对应的元素
+	removeAt(index: number) {
+		if (index >= 0 && index < this.count) {
+			let current = this.head;
+			if (index === 0) {
+				this.head = current?.next || null;
+				if (this.count === 1) {
+					this.tail = null;
+				} else {
+					this.head!.prev = null;
+				}
+			} else if (index === this.count - 1) {
+				current = this.tail;
+				this.tail = current?.prev || null;
+				this.tail!.next = null;
+			} else {
+				current = this.getElementAt(index) || null;
+				const previous = current?.prev || null;
+				previous!.next = current?.next || null;
+				current!.next!.prev = previous;
+			}
+			this.count--;
+			return current!.element;
+		}
+		return undefined;
+	}
+	//尾部添加元素
+	push(element: T) {
+		const node = new DoublyNode(element);
+		if (this.head === null) {
+			this.tail = node;
+			this.head = node;
+		} else {
+			this!.tail!.next = node;
+			node.prev = this.tail;
+			this.tail = node;
+		}
+		this.count++;
+	}
+	// 获取双向列表的长度
+	size() {
+		return this.count;
+	}
+	// 清空双向列表
+	clear() {
+		this.count = 0;
+		this.head = null;
+		this.tail = null;
+	}
+	// 获取双向列表头部元素
+	getHead() {
+		return this.head === null ? undefined : this.head.element;
+	}
+	// 获取双向列表尾部元素
+	getTail() {
+		return this.tail === null ? undefined : this.tail.element;
+	}
+	// 判断双向列表是否为空
+	isEmpty() {
+		return !this.count;
+	}
+	// 打印
+	inverseToString() {
+		if (this.tail === null) {
+			return '';
+		}
+		let str = `${this.tail.element}`;
+		let current = this.tail.prev;
+		for (let index = 0; index < this.count && current != null; index++) {
+			str = `${str},${current.element}`;
+			current = current.prev;
+		}
+		return str;
+	}
+	// 返回表示整个链表的字符串
+	toString() {
+		if (this.isEmpty()) {
+			return undefined;
+		}
+		let result = '';
+		let cur = this.head;
+		// console.log('🚀 ~ Link<T> ~ toString ~ cur:', cur!.next?.next);
+		while (cur) {
+			result += `${cur?.element},`;
+			cur = cur.next;
+		}
+		return result.slice(0, -1);
+	}
+}
+
+const linkedList = new DoublyLinkedList();
+console.log(linkedList.size()); // 0
+console.log(linkedList.isEmpty()); // true
+linkedList.push(1);
+console.log(linkedList.getHead()); // 1
+linkedList.push(3);
+linkedList.push(2);
+linkedList.push(5);
+console.log(linkedList.size()); // 4
+const node = linkedList.getElementAt(2);
+console.log(node?.element); // 2
+console.log(linkedList.indexOf(5)); // 3
+console.log(linkedList.indexOf(8)); // -1
+console.log(linkedList.insert(9, 1)); // true
+console.log(linkedList.toString()); // 1,9,3,2,5
+console.log(linkedList.inverseToString()); // 5,2,3,9,1
+console.log(linkedList.getTail()); // 5
+console.log(linkedList.remove(2)); // 2
+console.log(linkedList.toString()); // 1,9,3,5
+console.log(linkedList.inverseToString()); // 5,3,9,1
+console.log(linkedList.removeAt(2)); // 3
+console.log(linkedList.toString()); // 1,9,5
+```
+
+### 实现循环链表
+
+```ts
+import { LinkedList, LinkNode } from './3.链表';
+import { defaultEquals } from './utils/index';
+
+class CircularLinkedList<T> extends LinkedList<T> {
+	constructor(equalsFn = defaultEquals) {
+		super(equalsFn);
+	}
+	insert(element: T, index: number) {
+		if (index >= 0 && index <= this.count) {
+			const node = new LinkNode(element);
+			let current = this.head;
+			if (index === 0) {
+				if (this.head === null) {
+					this.head = node;
+					node.next = this.head;
+				} else {
+					node.next = current;
+					current = this.getElementAt(this.count - 1) || null;
+					current!.next = node;
+					this.head = node;
+				}
+			} else {
+				const previous = this.getElementAt(index - 1);
+				node.next = previous?.next || null;
+				previous!.next = node;
+			}
+			this.count++;
+			return true;
+		}
+		return false;
+	}
+	removeAt(index: number) {
+		if (index >= 0 && index < this.count) {
+			let current = this.head;
+			if (index === 0) {
+				if (this.count === 1) {
+					this.head = null;
+				} else {
+					const removed = this.head;
+					current = this.getElementAt(this.count - 1) || null;
+					this.head = this.head?.next || null;
+					current!.next = this.head;
+					current = removed;
+				}
+			} else {
+				const previous = this.getElementAt(index - 1);
+				current = previous?.next || null;
+				previous!.next = current?.next || null;
+			}
+			this.count--;
+			return current?.element;
+		}
+		return undefined;
+	}
+}
+const linkedList = new CircularLinkedList();
+console.log(linkedList.size()); // 0
+console.log(linkedList.isEmpty()); // true
+linkedList.push(1);
+console.log(linkedList.getHead()); // 1
+linkedList.push(3);
+linkedList.push(2);
+linkedList.push(5);
+console.log(linkedList.size()); // 4
+const node = linkedList.getElementAt(2);
+console.log(node?.element); // 2
+console.log(linkedList.indexOf(5)); // 3
+console.log(linkedList.indexOf(8)); // -1
+console.log(linkedList.insert(9, 1)); // true
+console.log(linkedList.toString()); // 1,9,3,2,5
+console.log(linkedList.remove(2)); // 2
+console.log(linkedList.toString()); // 1,9,3,5
+console.log(linkedList.removeAt(2)); // 3
+console.log(linkedList.toString()); // 1,9,5
+```
+
+## 集合
+
+### 实现集合
+
+```ts	
+// 基于类实现
+interface ISet<T = any> {
+	[key: string | number | symbol]: T;
+}
+class CustomSet {
+	private items: ISet;
+	constructor() {
+		this.items = {};
+	}
+	// 向集合中添加新元素。
+	add(element: string | number | symbol) {
+		if (!this.has(element)) {
+			this.items[element] = element;
+			return true;
+		}
+		return false;
+	}
+	// 从集合移除一个元素。
+	delete(element: string | number | symbol) {
+		if (this.has(element)) {
+			delete this.items[element];
+			return true;
+		}
+		return false;
+	}
+	// 判断元素是否在集合中，如果是则返回true，否则返回false。
+	has(element: string | number | symbol) {
+		return element in this.items;
+	}
+	// 清空集合。
+	clear() {
+		this.items = {};
+	}
+	// 返回集合所包含元素的数量。
+	size() {
+		return Object.keys(this.items).length;
+	}
+	// 返回一个包含集合中所有值的数组。
+	values() {
+		return Object.values(this.items);
+	}
+}
+const set = new CustomSet();
+set.add(1);
+console.log('🚀 ~ set.values():', set.values()); // 🚀 ~ set.values(): [1]
+console.log('🚀 ~ set.has(1):', set.has(1)); // 🚀 ~ set.has(1): true
+console.log('🚀 ~ set.size():', set.size()); // 🚀 ~ set.size(): 1
+set.add(2);
+console.log('🚀 ~ set.values():', set.values()); // 🚀 ~ set.values(): [1, 2]
+console.log('🚀 ~ set.has(2):', set.has(2)); // 🚀 ~ set.has(2): true
+console.log('🚀 ~ set.size():', set.size()); // 🚀 ~ set.size(): 2
+set.delete(1);
+console.log('🚀 ~ set.values():', set.values()); // 🚀 ~ set.values(): [2]
+set.delete(2);
+console.log('🚀 ~ set.values():', set.values()); // 🚀 ~ set.values(): []
+```
+
