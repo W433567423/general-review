@@ -14,7 +14,7 @@
 		"format": "prettier --write \"src/**/*.ts\"",
 		"lint": "eslint \"./src/**/*.{js,ts}\" --fix",
 		"parcel": "parcel index.html",
-		"prepare": "husky"
+		"prepare": "npx prettier --write --end-of-line lf src && husky"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^18.6.1",
