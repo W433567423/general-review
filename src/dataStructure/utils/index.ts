@@ -22,6 +22,13 @@ const defaultToString = (item: unknown) => {
 	return item.toString();
 };
 
+const defaultCompare = (a: number, b: number) => {
+	if (a === b) {
+		return 0;
+	}
+	return a < b ? -1 : 1;
+};
+
 class ValuePair {
 	private key: string | number | symbol;
 	private value: any;
@@ -35,4 +42,4 @@ class ValuePair {
 		} else return `{#${this.key}}: ${this.value}`;
 	}
 }
-export { ValuePair, defaultEquals, defaultToString };
+export { ValuePair, defaultCompare, defaultEquals, defaultToString };
